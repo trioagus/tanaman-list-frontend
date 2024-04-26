@@ -1,10 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
-// import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/header/Navbar";
 
 function RootLayout() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Link to="/">Home</Link>
       <Link to={"/about"}>About</Link>
       <Outlet />
