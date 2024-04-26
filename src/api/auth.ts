@@ -39,7 +39,7 @@ export const login = async (user: User) => {
 export const logout = async () => {
     try {
         const baseUrl = await getUrlBase();
-        const response = await axios.post(`${baseUrl}/auth/logout/:id`);
+        const response = await axios.post(`${baseUrl}/auth/logout`);
         return response.data;
     } catch (error) {
         console.log(error);

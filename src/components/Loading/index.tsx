@@ -1,6 +1,6 @@
 import styles from "./Loading.module.scss";
 
-const Loading: React.FC = () => {
+const  Loading: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.loader}>
@@ -13,3 +13,5 @@ const Loading: React.FC = () => {
 };
 
 export default Loading;
+
+

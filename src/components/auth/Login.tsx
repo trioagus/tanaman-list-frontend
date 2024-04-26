@@ -5,12 +5,13 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../store/authStore";
 import styles from "./Login.module.scss";
 
- const Login: React.FC = () => {
+const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>();
   const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = {
@@ -19,10 +20,13 @@ import styles from "./Login.module.scss";
     };
 
     try {
+      setLoading(true);
       await login(userData);
       navigate("/");
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,9 +77,13 @@ import styles from "./Login.module.scss";
           </div>
           {errors.password && <p className={styles.error}>Password is required.</p>}
           {error && <p className={styles.error}>{error}</p>}
-          <button type="submit" className={styles.button}>
-            Login
-          </button>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <button type="submit" className={styles.button}>
+              Login
+            </button>
+          )}
           <p className={styles.text}>
             Don't have an account?{" "}
             <Link to="/register" className={styles.link}>
