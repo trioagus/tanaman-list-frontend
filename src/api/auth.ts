@@ -1,40 +1,48 @@
 import axios from "axios";
 
-const urlBase = import.meta.env.VITE_BASE_URL;
+let urlBase: string;
+
+const getUrlBase = async () => {
+    if (!urlBase) {
+        const envModule = await import.meta.env;
+        urlBase = envModule.VITE_BASE_URL;
+    }
+    return urlBase;
+};
 
 type User = {
     id?: string;
-   username: string;
+    username: string;
     password?: string;
-  };
+};
 
 export const register = async (user: User) => {
-  try {
-    const response = await axios.post(`${urlBase}/auth/register`, user);
-
-    return response.data;
-  } catch (error: any) {
-    return error.response.data;
-  }
+    try {
+        const baseUrl = await getUrlBase();
+        const response = await axios.post(`${baseUrl}/auth/register`, user);
+        return response.data;
+    } catch (error: any) {
+        return error.response.data;
+    }
 };
 
 export const login = async (user: User) => {
-  try {
-    const response = await axios.post(`${urlBase}/auth/login`, user);
-
-    return response;
-  } catch (error: any) {
-    return error.response.data;
-  }
+    try {
+        const baseUrl = await getUrlBase();
+        const response = await axios.post(`${baseUrl}/auth/login`, user);
+        return response;
+    } catch (error: any) {
+        return error.response.data;
+    }
 };
 
 export const logout = async () => {
     try {
-      const response = await axios.post(`${urlBase}/auth/logout/:id`);
-  
-      return response.data;
+        const baseUrl = await getUrlBase();
+        const response = await axios.post(`${baseUrl}/auth/logout/:id`);
+        return response.data;
     } catch (error) {
-      console.log(error);
-      throw error;
+        console.log(error);
+        throw error;
     }
-  };
+};

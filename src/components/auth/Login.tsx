@@ -5,7 +5,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../../store/authStore";
 import styles from "./Login.module.scss";
 
-export const Login: React.FC = () => {
+ const Login: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>();
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -87,3 +87,5 @@ export const Login: React.FC = () => {
     </div>
   );
 };
+
+export default Login;

@@ -44,15 +44,17 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <button className={styles.menuButton} onClick={toggle}>
-        <FiMenu  className={styles.menuIcon} />
+        <FiMenu className={styles.menuIcon} />
       </button>
       <ul className={`${styles.menu} ${isOpen ? styles.open : ""}`}>
         {menuItems.map((item, index) => (
           <li key={index} className={styles.menuItem}>
             {item.onClick ? (
-              <button onClick={item.onClick}>{item.label}</button>
+              <button onClick={item.onClick} className={styles.buttonLink}>{item.label}</button>
             ) : (
-              <Link to={item.url} className={styles.menuLink}>{item.label}</Link>
+              <Link to={item.url} className={styles.menuLink}>
+                {item.label}
+              </Link>
             )}
           </li>
         ))}
