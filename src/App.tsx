@@ -3,6 +3,7 @@ import RootLayout from "./router/root";
 import { HomePage } from "./pages/HomePage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { LoginPage } from "./pages/LoginPage";
+import { DashboardPage } from "./pages/DashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
+  {
+    path: '/dashboard',
+    element: <DashboardPage />
+  }
 ]);
 
 export const App = () => <RouterProvider router={router} />;

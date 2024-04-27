@@ -1,0 +1,154 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  color: #333;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background-color: #28a745;
+    border-bottom: 1px solid #ccc;
+    color: #fff;
+
+    .headerTitle {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-inline: auto;
+      right: 1rem;
+    }
+
+    .toggleButton {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 1.5rem;
+      left: 1rem;
+      align-items: center;
+
+      .menuIcon {
+        font-size: 2rem;
+        color: #fff;
+      }
+    }
+  }
+
+  .sidebarMenu {
+    margin-top: 5.1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    padding: 1rem;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+
+    &.active {
+      transform: translateX(0);
+    }
+
+    transition: transform 0.3s ease;
+    @media only screen and (max-width: 768px) {
+      transform: translateX(-100%);
+    }
+
+    .sidebarList {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .sidebarItem {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s ease;
+
+        .sidebarLink {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: #333;
+
+          .active {
+            color: #28a745;
+          }
+
+          .sidebarIcon {
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+            padding: 1rem;
+          }
+
+          .sidebarText {
+            font-size: 1rem;
+            margin-left: 0.5rem;
+          }
+
+          &:hover {
+            background-color: #f5f5f5;
+          }
+        }
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    padding: 1rem;
+  }
+
+  .logoutButton {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    border: none;
+    outline: none;
+    background-color: #dc3545;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: #c82333;
+    }
+    .logoutIcon {
+      font-size: 1.5rem;
+    }
+
+    .logoutText {
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .header {
+      .headerTitle {
+        font-size: 1.5rem;
+      }
+    }
+
+    .sidebarMenu {
+      margin-top: 5.9rem;
+    }
+
+    .toggleButton {
+      display: none;
+    }
+  }
+}
