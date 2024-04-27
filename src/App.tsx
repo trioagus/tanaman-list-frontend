@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
+import { JenisPage } from "./pages/JenisPage";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,15 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <DashboardPage />
+    element: <DashboardPage />,
+  },
+  {
+    path: '/dashboard/jenis',
+    element: <JenisPage />,
+  },
+  {
+    path: '/dashboard/tanaman',
+    element: <div>Tanaman</div>
   }
 ]);
 

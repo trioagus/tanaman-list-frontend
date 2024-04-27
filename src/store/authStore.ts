@@ -27,8 +27,8 @@ export const useAuth = () => {
 export const useAuthStore = create<AuthState>()(
   persist<AuthState>(
     (set) => ({
-      user: JSON.parse(sessionStorage.getItem("user") || "null"),
-      token: sessionStorage.getItem("token") || null,
+      user: null as User | null,
+      token: null as string | null,
       loading: false as boolean,
       error: null as string | null,
       isLoggedIn: false,

@@ -1,18 +1,31 @@
+$primary-color: #28a745;
+$secondary-color: #dc3545;
+$text-color: #333;
+$sidebar-bg-color: #fff;
+$sidebar-hover-color: #f5f5f5;
+$sidebar-active-color: #28a745;
+$header-bg-color: #f5f5f5;
+$header-text-color: #fff;
+$header-border-color: #ccc;
+$logout-hover-color: #dc3545;
+
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: $header-bg-color;
+  color: $text-color;
 
   .header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.8rem 1rem;
-    background-color: #28a745;
-    border-bottom: 1px solid #ccc;
-    color: #fff;
+    background-color: $primary-color;
+    border-bottom: 1px solid $header-border-color;
+    color: $header-text-color;
 
     .headerTitle {
       font-size: 1.2rem;
@@ -33,7 +46,7 @@
 
       .menuIcon {
         font-size: 2rem;
-        color: #fff;
+        color: $header-text-color;
       }
     }
   }
@@ -46,8 +59,8 @@
     bottom: 0;
     width: 200px;
     padding: 1rem;
-    background-color: #fff;
-    border-right: 1px solid #ccc;
+    background-color: $sidebar-bg-color;
+    border-right: 1px solid $header-border-color;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 0;
 
@@ -75,10 +88,10 @@
           display: flex;
           align-items: center;
           text-decoration: none;
-          color: #333;
+          color: $text-color;
 
           .active {
-            color: #28a745;
+            color: $sidebar-active-color;
           }
 
           .sidebarIcon {
@@ -93,12 +106,12 @@
           }
 
           &:hover {
-            background-color: #f5f5f5;
+            background-color: $sidebar-hover-color;
           }
         }
 
         &:hover {
-          background-color: #f5f5f5;
+          background-color: $sidebar-hover-color;
         }
       }
     }
@@ -107,32 +120,47 @@
   .content {
     flex: 1;
     padding: 1rem;
+    margin-left: 0;
   }
 
   .logoutButton {
-    position: absolute;
+    position: fixed;
     bottom: 1rem;
     left: 1rem;
     border: none;
     outline: none;
-    background-color: #dc3545;
-    color: #fff;
+    background-color: $secondary-color;
+    color: $header-text-color;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
     cursor: pointer;
     display: flex;
     align-items: center;
+    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #c82333;
+      background-color: $header-bg-color;
+      color: $logout-hover-color;
     }
+
     .logoutIcon {
       font-size: 1.5rem;
+      color: $header-text-color;
+      margin-right: 0.5rem;
+
+      &:hover {
+        color: $logout-hover-color;
+      }
     }
 
     .logoutText {
       font-size: 1rem;
       margin-left: 0.5rem;
+      color: $header-text-color;
+
+      &:hover {
+        color: $logout-hover-color;
+      }
     }
   }
 
@@ -149,6 +177,10 @@
 
     .toggleButton {
       display: none;
+    }
+
+    .content {
+      margin-left: 14rem;
     }
   }
 }

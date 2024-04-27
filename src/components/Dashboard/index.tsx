@@ -14,9 +14,9 @@ const listSidebar = [
     url: "/",
   },
   {
-    name: "Kategori",
+    name: "Jenis",
     icon: <BiCategory className={styles.sidebarIcon} />,
-    url: "/dashboard/category",
+    url: "/dashboard/jenis",
   },
   {
     name: "Tanaman",
@@ -47,8 +47,7 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
           <IoMdMenu className={styles.menuIcon} />
         </button>
       </header>
-      <nav
-        className={`${styles.sidebarMenu} ${showSidebar ? styles.active : ""}`}>
+      <nav className={`${styles.sidebarMenu} ${showSidebar ? styles.active : ""}`}>
         <ul className={styles.sidebarList}>
           {listSidebar.map((item, index) => (
             <li key={index} className={styles.sidebarItem}>
@@ -58,13 +57,17 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
               </a>
             </li>
           ))}
+          <li className={styles.sidebarItem}>
+            <button className={`${styles.sidebarLink} ${styles.logoutButton}`} onClick={handleLogout}>
+              <IoMdExit className={styles.logoutIcon} />
+              <span className={styles.logoutText}>Keluar</span>
+            </button>
+          </li>
         </ul>
       </nav>
       <div className={styles.content}>{children}</div>
-      <button className={styles.logoutButton} onClick={handleLogout}>
-        <IoMdExit className={styles.logoutIcon} />
-        <span className={styles.logoutText}>Keluar</span>
-      </button>
     </div>
   );
 };
+
+

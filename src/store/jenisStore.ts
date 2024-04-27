@@ -18,13 +18,14 @@ type JenisState = {
   getJenisById: (id: string) => void;
   addJenis: (Jenis: JenisType, token: string) => void;
   updateJenis: (id: string, Jenis: JenisType, token: string) => void;
-  deleteJenis: (id: string) => void;
+  deleteJenis: (id: string, token: string) => void;
 };
 
 export const useJenisStore = create<JenisState>()((set) => ({
   Jenis: [],
   getJenis: async () => {
     const Jenis = await getJenis();
+    console.log(Jenis);
     set({ Jenis });
   },
   getJenisById: async (id: string) => {
@@ -39,8 +40,8 @@ export const useJenisStore = create<JenisState>()((set) => ({
     const Jenis = await updateJenis(id, jenis, token);
     set({ Jenis });
   },
-  deleteJenis: async (id: string) => {
-    const Jenis = await deleteJenis(id);
+  deleteJenis: async (id: string, token: string) => {
+    const Jenis = await deleteJenis(id, token);
     set({ Jenis });
-  },
+  },  
 }));
