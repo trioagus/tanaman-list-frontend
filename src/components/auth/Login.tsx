@@ -78,7 +78,7 @@ const Login: React.FC = () => {
           {errors.password && <p className={styles.error}>Password is required.</p>}
           {error && <p className={styles.error}>{error}</p>}
           {loading ? (
-            <p>Loading...</p>
+            <p className={styles.text}>Loading...</p>
           ) : (
             <button type="submit" className={styles.button}>
               Login

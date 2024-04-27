@@ -14,7 +14,6 @@ type JenisForm = {
 
 export const Jenis: React.FC = () => {
   const jenis = useJenisStore((state) => state.Jenis);
-  console.log(jenis);
   const getJenis = useJenisStore((state) => state.getJenis);
   const addJenis = useJenisStore((state) => state.addJenis);
   const updateJenis = useJenisStore((state) => state.updateJenis);
@@ -23,7 +22,7 @@ export const Jenis: React.FC = () => {
   const [formData, setFormData] = useState<JenisForm>({ name: "" });
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>("");
-  const [showForm, setShowForm] = useState<boolean>(false); // State untuk mengontrol tampilan form
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   useEffect(() => {
     getJenis();
@@ -61,40 +60,39 @@ export const Jenis: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Jenis Tanaman</h1>
+      <button className={styles.addButton} onClick={() => setShowForm(true)}>
+        Add Jenis
+      </button>
       {showForm && (
-        <form className={styles.floatForm} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Masukkan Jenis Tanaman"
-            className={styles.input}
-          />
-          <button type="submit" className={styles.button}>
-            {editMode ? "Update" : "Add"}
-          </button>
-          <button
-            className={styles.closeButton}
-            onClick={() => setShowForm(false)}>
-            Close
-          </button>
-        </form>
-      )}
-      {!showForm && (
-        <button className={styles.addButton} onClick={() => setShowForm(true)}>
-          Add Jenis
-        </button>
+        <div className={styles.modal}>
+          <form className={styles.modalContent} onSubmit={handleSubmit}>
+            <span
+              className={styles.closeButton}
+              onClick={() => setShowForm(false)}>
+              &times;
+            </span>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              placeholder="Masukkan Jenis Tanaman"
+              className={styles.input}
+            />
+            <button type="submit" className={styles.button}>
+              {editMode ? "Update" : "Tambah"}
+            </button>
+          </form>
+        </div>
       )}
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           <tr>
             <th className={styles.tableHeader}>No</th>
             <th className={styles.tableHeader}>Jenis Tanaman</th>
-            <th className={styles.tableHeader}>Action</th>
+            <th className={styles.tableHeader}>Aksi</th>
           </tr>
         </thead>
-
         <tbody className={styles.tableBody}>
           {Array.isArray(jenis) &&
             jenis.map((item: JenisType, index: number) => (
