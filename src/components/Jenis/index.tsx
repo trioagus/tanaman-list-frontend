@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { FaPlus, FaTrash, FaEdit } from "react-icons/fa";
 import styles from "./Jenis.module.scss";
 import { useJenisStore } from "../../store/jenisStore";
 import { useAuth } from "../../store/authStore";
+import { usePaginationStore } from "../../store/paginationStore";
+import { Pagination } from "../core/Pagination";
 
 type JenisType = {
   id?: string;
@@ -19,6 +22,7 @@ export const Jenis: React.FC = () => {
   const updateJenis = useJenisStore((state) => state.updateJenis);
   const deleteJenis = useJenisStore((state) => state.deleteJenis);
   const { token } = useAuth();
+  const { page } = usePaginationStore();
   const [formData, setFormData] = useState<JenisForm>({ name: "" });
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editId, setEditId] = useState<string>("");
@@ -57,11 +61,19 @@ export const Jenis: React.FC = () => {
     getJenis();
   };
 
+  const totalPages = Math.ceil(jenis.length / 5);
+
+  const getVisibleItems = () => {
+    const startIndex = (page - 1) * 5;
+    const endIndex = startIndex + 5;
+    return jenis.slice(startIndex, endIndex);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Jenis Tanaman</h1>
       <button className={styles.addButton} onClick={() => setShowForm(true)}>
-        Add Jenis
+        <FaPlus />
       </button>
       {showForm && (
         <div className={styles.modal}>
@@ -94,29 +106,28 @@ export const Jenis: React.FC = () => {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {Array.isArray(jenis) &&
-            jenis.map((item: JenisType, index: number) => (
-              <tr key={item.id}>
-                <td className={styles.tableData}>{index + 1}</td>
-                <td className={styles.tableData}>{item.name}</td>
-                <td className={styles.tableData}>
-                  <button
-                    className={styles.editButton}
-                    onClick={() => handleEdit(item.id as string, item.name)}>
-                    Edit
-                  </button>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={() => handleDelete(item.id as string)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {getVisibleItems().map((item: JenisType, index: number) => (
+            <tr key={item.id}>
+              <td className={styles.tableData}>{index + 1 + (page - 1) * 5}</td>
+              <td className={styles.tableData}>{item.name}</td>
+              <td className={styles.tableData}>
+                <button
+                  className={styles.editButton}
+                  onClick={() => handleEdit(item.id as string, item.name)}>
+                  <FaEdit />
+                </button>
+                &nbsp;&nbsp;&nbsp;
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(item.id as string)}>
+                  <FaTrash />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <Pagination totalPages={totalPages} />
     </div>
   );
 };
-
-export default Jenis;
