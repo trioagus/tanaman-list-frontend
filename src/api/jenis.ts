@@ -19,7 +19,7 @@ export const getJenis = async () => {
   try {
     const baseUrl = await getUrlBase();
     const response = await axios.get(`${baseUrl}/jenis`);
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
